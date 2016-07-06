@@ -29,21 +29,14 @@ public class ColorActivity extends Activity implements SeekBar.OnSeekBarChangeLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_color);
 
         ColorParser colorParser = new ColorParser(this);
         colorNameList = colorParser.getColorsAsList();
 
-        ColorName testColor = ColorName.findClostestColorName(colorNameList, Color.BLUE);
-        Log.d("Test", testColor.getName());
-
-        ColorName testColor2 = ColorName.findClostestColorName(colorNameList, Color.CYAN);
-        Log.d("Test", testColor2.getName());
-
         setViewReferences();
-
         initListeners();
-
         initAnimations();
     }
 
