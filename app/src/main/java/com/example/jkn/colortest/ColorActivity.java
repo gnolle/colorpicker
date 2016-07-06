@@ -96,5 +96,13 @@ public class ColorActivity extends Activity implements SeekBar.OnSeekBarChangeLi
 
     private void updateColorName() {
         colorName.setText(ColorName.findClostestColorName(colorNameList, currentColor).getName());
+        updateColorNameColor();
+    }
+
+    private void updateColorNameColor() {
+        if (ColorName.calculateLuminosity(currentColor) > 0.179)
+            colorName.setTextColor(Color.BLACK);
+        else
+            colorName.setTextColor(Color.WHITE);
     }
 }

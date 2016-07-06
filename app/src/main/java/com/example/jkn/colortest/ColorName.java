@@ -77,4 +77,25 @@ public class ColorName {
 
         return nearestColorName;
     }
+
+    public static double calculateLuminosity(int color) {
+
+        double r = Color.red(color);
+        double g = Color.green(color);
+        double b = Color.blue(color);
+
+        double[] c = new double[] {r, g, b};
+
+        for (int i = 0; i < c.length; i++) {
+            c[i] = c[i] / 255.0;
+            if (c[i] <= 0.03928)
+                c[i] = c[i] / 12.92;
+            else
+                c[i] = Math.pow((c[i] + 0.055) / 1.055, 2.4);
+        }
+
+        double luminosity = 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+
+        return luminosity;
+    }
 }
