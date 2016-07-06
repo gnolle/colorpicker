@@ -7,12 +7,14 @@
     tools:context="com.example.jkn.colortest.ColorActivity">
 
     <FrameLayout
+        android:id="@+id/color_field"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="#b12121">
 
         <TextView
+            android:id="@+id/color_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Peanut Butter"
@@ -24,6 +26,7 @@
     </FrameLayout>
 
     <LinearLayout
+        android:background="#fff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -104,7 +107,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/bar_brightness"
+                android:id="@+id/bar_value"
                 android:indeterminate="false"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"

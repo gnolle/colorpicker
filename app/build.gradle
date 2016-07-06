@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.jkn.colortest"
-        minSdkVersion 21
-        targetSdkVersion 23
+        minSdkVersion 23
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
