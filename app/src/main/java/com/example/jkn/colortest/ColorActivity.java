@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ public class ColorActivity extends Activity implements SeekBar.OnSeekBarChangeLi
     SeekBar barBrightness;
     View colorField;
     TextView colorName;
+    AlphaAnimation fadeIn;
+    AlphaAnimation fadeOut;
 
     int currentColor;
     List<ColorName> colorNameList;
@@ -40,6 +43,18 @@ public class ColorActivity extends Activity implements SeekBar.OnSeekBarChangeLi
         setViewReferences();
 
         initListeners();
+
+        initAnimations();
+    }
+
+    private void initAnimations() {
+        fadeIn = new AlphaAnimation(0.0f, 1.0f);
+        fadeIn.setDuration(100);
+        fadeIn.setFillAfter(true);
+
+        fadeOut = new AlphaAnimation(1.0f, 0.0f);
+        fadeOut.setDuration(100);
+        fadeOut.setFillAfter(true);
     }
 
     private void setViewReferences() {
@@ -87,11 +102,13 @@ public class ColorActivity extends Activity implements SeekBar.OnSeekBarChangeLi
     }
 
     private void hideColorName(){
-        colorName.setVisibility(View.GONE);
+        colorName.startAnimation(fadeOut);
+//        colorName.setVisibility(View.GONE);
     };
 
     private void showColorName(){
-        colorName.setVisibility(View.VISIBLE);
+//        colorName.setVisibility(View.VISIBLE);
+        colorName.startAnimation(fadeIn);
     };
 
     private void updateColorName() {
