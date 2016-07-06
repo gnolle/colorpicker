@@ -98,4 +98,9 @@ public class ColorName {
 
         return luminosity;
     }
+
+    public static String colorToHexString(int color) {
+        String hexColor = String.format("#%06X", (0xFFFFFF & color));
+        return hexColor;
+    }
 }
