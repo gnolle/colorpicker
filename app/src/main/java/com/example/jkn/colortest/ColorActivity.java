@@ -1,9 +1,10 @@
 package com.example.jkn.colortest;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.SeekBar;
@@ -14,6 +15,9 @@ import java.util.List;
 public class ColorActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
 
     public final static String TAG = ColorActivity.class.getSimpleName();
+    final static String PREF_HUE = "PREF_HUE";
+    final static String PREF_SATURATION = "PREF_SAT";
+    final static String PREF_BRIGHTNESS = "PREF_BRI";
 
     SeekBar barHue;
     SeekBar barSaturation;
@@ -38,6 +42,16 @@ public class ColorActivity extends Activity implements SeekBar.OnSeekBarChangeLi
         setViewReferences();
         initListeners();
         initAnimations();
+        initHsvBars();
+    }
+
+    private void initHsvBars() {
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        barHue.setProgress(sharedPref.getInt(PREF_HUE, 0));
+        barSaturation.setProgress(sharedPref.getInt(PREF_SATURATION, 0));
+        barBrightness.setProgress(sharedPref.getInt(PREF_BRIGHTNESS, 0));
+        calculateCurrentColor();
+        updateColorField();
     }
 
     private void initAnimations() {
@@ -105,7 +119,7 @@ public class ColorActivity extends Activity implements SeekBar.OnSeekBarChangeLi
     };
 
     private void updateColorName() {
-        colorName.setText(ColorName.findClostestColorName(colorNameList, currentColor).getName());
+        colorName.setText(ColorName.findClosestColorName(colorNameList, currentColor).getName());
         updateColorNameColor();
     }
 
@@ -114,5 +128,17 @@ public class ColorActivity extends Activity implements SeekBar.OnSeekBarChangeLi
             colorName.setTextColor(Color.BLACK);
         else
             colorName.setTextColor(Color.WHITE);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(PREF_HUE, barHue.getProgress());
+        editor.putInt(PREF_SATURATION, barSaturation.getProgress());
+        editor.putInt(PREF_BRIGHTNESS, barBrightness.getProgress());
+        editor.commit();
     }
 }

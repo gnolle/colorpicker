@@ -47,7 +47,7 @@ public class ColorName {
         this.color = color;
     }
 
-    public static ColorName findClostestColorName(List<ColorName> colorNameList, int colorToName) {
+    public static ColorName findClosestColorName(List<ColorName> colorNameList, int colorToName) {
 
         double nearestColorDistance = Double.MAX_VALUE;
         ColorName nearestColorName = null;
